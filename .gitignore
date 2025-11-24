@@ -1,6 +1,91 @@
+## ============================================
+## .gitignore — Projeto Conversão de Moedas
+## Todas as Fases (0 a 7)
+## ============================================
+
+# ================
+# Padrão .NET / C#
+# ================
 bin/
 obj/
-.vs/
 *.user
 *.suo
+*.sln.docstates
+
+# Backups
+*.bak
+*.tmp
+*.temp
+*.old
+
+# Arquivos de log
 *.log
+
+# Arquivos de build
+*.dll
+*.exe
+*.pdb
+
+# Configurações locais
+*.vscode/
+*.vs/
+.vscode/
+.vs/
+
+# ============================
+# Testes e ferramentas de build
+# ============================
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# ====================
+# Repositórios persistentes
+# (CSV e JSON das fases 6 e 7)
+# ====================
+currency_rates.csv
+currency_rates.json
+
+# Se você quiser que o arquivo seja versionado,
+# REMOVA as duas linhas acima.
+
+# ================
+# Sistema Operacional
+# ================
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =======================
+# IDEs opcionais
+# =======================
+# Rider / JetBrains
+.idea/
+*.DotSettings.user
+
+# =======================
+# Node / Web (caso futuro)
+# =======================
+node_modules/
+
+# =======================
+# Arquivos temporários
+# =======================
+*.cache
+*.temp
+*.tmp
+
+# =======================
+# Zip / pacotes exportados
+# =======================
+*.zip
+*.7z
+*.tar
+*.gz
