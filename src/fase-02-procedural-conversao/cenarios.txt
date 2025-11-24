@@ -1,1 +1,6 @@
+1) BRL -> USD, valor 520 BRL, FIXA -> 100 USD (com base rate 5.20)
+2) USD -> BRL, valor 100 USD, TURISMO -> resultado maior por spread
+3) EUR -> GBP, via BRL, FIXA -> converter e comparar com cálculo manual
+4) Atualizar rate personalizado USD para 5.00 e usar PERSONALIZADA -> efeito visível
+5) Entrada inválida de moeda -> mensagem de erro
 
