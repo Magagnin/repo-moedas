@@ -185,3 +185,26 @@ Cada teste usa arquivos temporários para evitar efeitos colaterais.
 Demonstrar que, usando interfaces, mudar o formato de persistência não exige mudar o serviço, nem o domínio.
 
 O contrato garante a estabilidade da arquitetura.
+
+⚖️ Fase 8 — Interface Segregation Principle (ISP)
+Esta fase é focada na refatoração arquitetural para aplicar o Princípio da Segregação de Interfaces (ISP), o quarto princípio do SOLID. O objetivo é eliminar o contrato "gordo" e garantir que os clientes dependam apenas dos métodos que realmente utilizam.
+
+Nesta fase foram implementados:
+
+✔️ Segregação de Contratos: O contrato genérico IRepository<T, TId> (leitura e escrita) foi quebrado em dois contratos mínimos e coesos:
+
+IReadRepository<T, TId> (apenas GetById, ListAll).
+
+IWriteRepository<T, TId> (apenas Add, Update, Remove).
+
+✔️ Cliente Refatorado: O CurrencyRateService foi ajustado para depender de ambos os contratos segregados em seu construtor, utilizando apenas o necessário para cada operação (ex.: ListAll usa apenas IReadRepository).
+
+✔️ Implementação Unificada: O JsonCurrencyRateRepository (da Fase 7) foi adaptado para implementar ambas as novas interfaces (IReadRepository e IWriteRepository), mantendo a lógica de persistência JSON.
+
+✔️ Dublês Mínimos em Testes: Criação de ReadOnlyFake e WriteOnlyFake nos testes de serviço para demonstrar que é possível criar dublês que implementam apenas o subconjunto de métodos exigidos pelo cliente, simplificando os testes.
+
+✔️ Nota de Design: Documentação obrigatória (NotaDeDesign.md) explicando o diagnóstico da interface gorda, a segregação escolhida e seus efeitos na arquitetura.
+
+Objetivo da Fase: Demonstrar que a aplicação do ISP reduz o acoplamento entre o cliente e o contrato, facilita a composição e simplifica drasticamente a criação de componentes para testes.
+
+
