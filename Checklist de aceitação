@@ -1,1 +1,15 @@
+ README com nomes da equipe / RAs (substituir antes de enviar).
+
+ Fase 0: casos completos (em src/fase-00-orientacoes/fase-00.md).
+
+ Fase 1: mapa heurístico (em docs/arquitetura/fase-01-mapa.md).
+
+ Fase 2: código procedural compilável (dotnet run) e cenarios.txt.
+
+ Fase 3: código OO sem interface compilável (dotnet run) e analise.md.
+
+ Arquivos .csproj prontos para rodar com .NET 6.0+.
+
+ .gitignore presente.
+
 
