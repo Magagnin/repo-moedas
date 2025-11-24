@@ -1,237 +1,102 @@
-✅ CHECKLIST GERAL — Fases 0 a 7 (Conversão de Moedas)
+✅ CHECKLIST GERAL — Fases 0 a 8
+Projeto: Conversão de Moedas (Id, From, To, Rate)
+
+Este repositório documenta a evolução passo a passo de um sistema completo de Conversão de Moedas, seguindo as fases de Arquitetura Orientada por Interfaces.
+
 📘 Fase 0 — Orientações
-
-✔ Pasta criada: src/fase-00-orientacoes/
-✔ Arquivo: fase-00.md
-✔ Explicação sobre processo fixo × variável
-✔ Referência à lousa
-
+Critério	Status
+Pasta criada: src/fase-00-orientacoes/	✔
+Arquivo: fase-00.md	✔
+Explicação sobre processo fixo × variável	✔
+Referência à lousa	✔
 🧭 Fase 1 — Mapa Heurístico
-
-✔ Pasta criada: docs/arquitetura/
-✔ Arquivo: fase-01-mapa.md
-✔ Mapa ou esquema explicando o fluxo da conversão
-✔ Identificação de usuário, entradas e resultado
-
-💻 Fase 2 — Procedural
-
-✔ Pasta criada: src/fase-02-procedural/
-✔ Projeto .csproj configurado
-✔ Código procedural (sem classes)
-✔ Program.cs funcionando
-✔ README.md da fase
-✔ Testado com dotnet run
-
-🧱 Fase 3 — OO (Orientado a Objetos, sem interfaces)
-
-✔ Pasta: src/fase-03-oo-sem-interface/
-✔ Classes criadas:
-
-Conversor
-
-MenuApp
-
-CurrencyRate (ou equivalente)
-
-✔ Programa completo orientado a objetos
-✔ README.md da fase
-✔ Projeto compila e executa (dotnet run)
-
+Critério	Status
+Pasta criada: docs/arquitetura/	✔
+Arquivo: fase-01-mapa.md	✔
+Mapa explicando o fluxo da conversão	✔
+Identificação de usuário, entradas e saída	✔
+💻 Fase 2 — Versão Procedural
+Critério	Status
+Pasta: src/fase-02-procedural/	✔
+Projeto .csproj criado	✔
+Código procedural sem classes	✔
+Program.cs funcional	✔
+README.md da fase	✔
+Execução testada com dotnet run	✔
+🧱 Fase 3 — OO sem Interfaces
+Critério	Status
+Pasta: src/fase-03-oo-sem-interface/	✔
+Classes: Conversor, MenuApp, CurrencyRate	✔
+Programa orientado a objetos completo	✔
+README.md da fase	✔
+Projeto compila e roda	✔
 🧩 Fase 4 — Interfaces Plugáveis e Testáveis
-
-✔ Pasta: src/fase-04-com-interfaces/
-✔ Interfaces criadas:
-
-IConversor
-
-IFormatador
-
-Outras necessárias
-
-✔ Implementações plugáveis
-✔ Catálogo / Composition Root configurado
-✔ Testes com fakes (xUnit)
-✔ Pasta de testes: tests/fase-04-tests/
-✔ Testes executando com sucesso (dotnet test)
-✔ README.md da fase explicando arquitetura
-
+Critério	Status
+Pasta: src/fase-04-com-interfaces/	✔
+Interfaces (IConversor, IFormatador, etc.)	✔
+Implementações plugáveis	✔
+Catálogo (Composition Root)	✔
+Testes com Fakes (xUnit)	✔
+Pasta: tests/fase-04-tests/	✔
+Testes executam sem erros	✔
+README.md da fase	✔
 🗂️ Fase 5 — Repository InMemory
-
-✔ Pasta: src/fase-05-repository-inmemory/
-✔ Interface genérica criada:
-
-IRepository<T, TId>
-
-
-✔ Implementação:
-
-InMemoryCurrencyRateRepository
-
-✔ Entidade oficial:
-
-CurrencyRate(Id, From, To, Rate)
-
-✔ Serviço de domínio:
-
-CurrencyRateService
-
-✔ Testes:
-
-tests/fase-05-tests/
-
-✔ Testam:
-
-Add
-
-ListAll
-
-GetById
-
-Update
-
-Remove
-
-✔ Política de ID definida (usuário informa)
-✔ Projeto compila e passa nos testes
-✔ README.md completo
-
-📁 Fase 6 — Repository CSV (Persistência Real)
-
-✔ Pasta: src/fase-06-repository-csv/
-✔ Repositório persistente CSV criado
-✔ Cabeçalho padrão: Id,From,To,Rate
-✔ Escape correto para:
-
-Aspas
-
-Vírgulas
-
-Quebras de linha
-
-✔ Ordenação por Id
-✔ Leitura e escrita com consistência
-✔ Reutilização de CurrencyRateService
-✔ Testes: tests/fase-06-tests/
-✔ Testes cobrem:
-
-Arquivo ausente → lista vazia
-
-Add
-
-GetById
-
-Update
-
-Remove
-
-Persistência real
-
-Valores contendo aspas/vírgulas
-
-✔ README da fase
-✔ Referência ao PDF da Fase 6
-/mnt/data/Lousa - Fase 6 - Repository Csv.pdf
-
-🗃️ Fase 7 — Repository JSON (System.Text.Json) ✓✓✓
-
-✔ Pasta criada:
-src/fase-07-repository-json/
-
-✔ Arquivos criados:
-
-Domain/CurrencyRate.cs
-
-Repository/IRepository.cs (reutilizado)
-
-Repository/JsonCurrencyRateRepository.cs
-
-Services/CurrencyRateService.cs
-
-Program.cs
-
-ConversorRepositoryJson.csproj
-
-README.md
-
-✔ Persistência JSON implementada:
-
-Serialização como lista (array)
-
-Formato JSON indentado
-
-Política camelCase
-
-Ignorar nulos (JsonIgnoreCondition.WhenWritingNull)
-
-Ordenação por Id
-
-Tratamento para:
-
-Arquivo ausente
-
-Arquivo vazio
-
-Arquivo corrompido
-
-✔ Política de ID:
-
-Id continua vindo do usuário
-
-✔ Testes criados:
-tests/fase-07-tests/
-
-✔ Testes cobrem:
-
-Arquivo ausente → lista vazia
-
-Add
-
-ListAll
-
-GetById
-
-Update
-
-Remove
-
-Arquivo corrompido → retorna lista vazia
-
-Persistência real em arquivo temporário
-
-✔ Tests.fase07.csproj criado corretamente
-✔ Todos os testes xUnit passam com sucesso (dotnet test)
-✔ README.md explicando JSON e opções do serializer
-
-✔ Referência ao PDF da fase 7:
-/mnt/data/Lousa — Fase 7_ Repository Json (system.text.pdf
-
-📚 README Raiz (Atualizado)
-
-✔ Lista todas as fases (0 → 7)
-✔ Links atualizados para cada pasta
-✔ Comandos de execução dotnet run
-✔ Comandos de teste dotnet test
-✔ Explicação completa do projeto
-✔ Agora inclui a Fase 7 JSON
-
+Critério	Status
+Pasta: src/fase-05-repository-inmemory/	✔
+Contrato IRepository<T, TId>	✔
+Implementação InMemory	✔
+Entidade: CurrencyRate	✔
+Serviço de domínio: CurrencyRateService	✔
+Testes: tests/fase-05-tests/	✔
+Testes cobrem CRUD completo	✔
+Política de ID definida (usuário informa)	✔
+README da fase	✔
+📁 Fase 6 — Repository CSV
+Critério	Status
+Pasta: src/fase-06-repository-csv/	✔
+Implementação: CsvCurrencyRateRepository	✔
+Cabeçalho: Id,From,To,Rate	✔
+Escape correto (aspas, vírgulas, quebras de linha)	✔
+Serviço reutilizado	✔
+Testes: tests/fase-06-tests/	✔
+Testes cobrem toda a persistência CSV	✔
+README da fase	✔
+PDF da fase 6 referenciado	✔
+🗃️ Fase 7 — Repository JSON (System.Text.Json)
+Critério	Status
+Pasta: src/fase-07-repository-json/	✔
+Implementação: JsonCurrencyRateRepository	✔
+Persistência real em JSON (array/lista)	✔
+Formatação camelCase / WriteIndented	✔
+Ignorar nulos	✔
+Tratamento: arquivo ausente/vazio/corrompido	✔
+Testes: tests/fase-07-tests/	✔
+Tests.fase07.csproj criado	✔
+README.md da fase	✔
+PDF da fase 7 referenciado	✔
+⚖️ Fase 8 — ISP (Interface Segregation Principle)
+Critério	Status
+Pasta: src/fase-08-isp/	✔
+Contratos segregados: IReadRepository, IWriteRepository	✔
+Serviço refatorado para depender do mínimo	✔
+Repositório JSON implementa os dois contratos	✔
+Documento de design: NotaDeDesign.md	✔
+Testes: tests/fase-08-tests/	✔
+Testes incluem Fakes separados (ReadOnly/WriteOnly)	✔
+Tests.fase08.csproj criado	✔
+README.md da fase 8	✔
+PDF da Fase 8 referenciado	✔
+📚 README Raiz
+Critério	Status
+Lista todas as fases (0 → 8)	✔
+Links corretos para cada pasta	✔
+Comandos dotnet run e dotnet test	✔
+Explicação geral do projeto completa	✔
+Agora inclui Fase 8 (ISP)	✔
 🧱 Organização Final do Repositório
-src/
-  fase-00-orientacoes/
-  fase-01-mapa/
-  fase-02-procedural/
-  fase-03-oo-sem-interface/
-  fase-04-com-interfaces/
-  fase-05-repository-inmemory/
-  fase-06-repository-csv/
-  fase-07-repository-json/
-
-tests/
-  fase-04-tests/
-  fase-05-tests/
-  fase-06-tests/
-  fase-07-tests/
-
-
-✔ .sln (opcional)
-✔ .gitignore atualizado
-✔ Repositório totalmente organizado
+Item	Status
+Estrutura src/ completa (Fases 0–8)	✔
+Estrutura tests/ completa (Fases 4–8)	✔
+Solução .sln criada (opcional)	✔
+.gitignore atualizado	✔
+Repositório limpo e profissional	✔
