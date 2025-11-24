@@ -1,15 +1,193 @@
- README com nomes da equipe / RAs (substituir antes de enviar).
+CHECKLIST GERAL — Fases 0 a 6 (Conversão de Moedas)
+📘 Fase 0 — Orientações
 
- Fase 0: casos completos (em src/fase-00-orientacoes/fase-00.md).
+✔ Pasta criada: src/fase-00-orientacoes/
+✔ Arquivo: fase-00.md
+✔ Explicação sobre processo fixo x variável
+✔ Referência à lousa
 
- Fase 1: mapa heurístico (em docs/arquitetura/fase-01-mapa.md).
+🧭 Fase 1 — Mapa Heurístico
 
- Fase 2: código procedural compilável (dotnet run) e cenarios.txt.
+✔ Pasta criada: docs/arquitetura/
+✔ Arquivo: fase-01-mapa.md
+✔ Mapa ou esquema explicando o fluxo da conversão
+✔ Identificação de usuário, entradas e resultado
 
- Fase 3: código OO sem interface compilável (dotnet run) e analise.md.
+💻 Fase 2 — Procedural
 
- Arquivos .csproj prontos para rodar com .NET 6.0+.
+✔ Pasta criada: src/fase-02-procedural/
+✔ Projeto .csproj configurado
+✔ Código procedural (sem classes)
+✔ Program.cs funcionando
+✔ README.md dentro da fase
+✔ Testado com dotnet run
 
- .gitignore presente.
+🧱 Fase 3 — OO sem Interface
+
+✔ Pasta: src/fase-03-oo-sem-interface/
+✔ Classes criadas:
+
+CurrencyRate ou equivalente
+
+Conversor
+
+MenuApp
+
+✔ Program orientado a objetos (mas rígido)
+✔ README explicando a arquitetura da fase
+✔ Projeto compila e roda (dotnet run)
+
+🧩 Fase 4 — Interfaces Plugáveis e Testáveis
+
+✔ Pasta: src/fase-04-com-interfaces/
+✔ Interfaces criadas:
+
+IConversor
+
+IFormatador
+
+Outras necessárias
+
+✔ Implementações plugáveis
+✔ Catálogo/Composition Root funcionando
+✔ Testes xUnit usando Fakes
+✔ Pasta: tests/fase-04-tests/
+✔ Projeto compila e testes passam com dotnet test
+✔ README da Fase 4 explicando tudo
+
+🗂️ Fase 5 — Repository InMemory (CurrencyRate)
+
+✔ Pasta: src/fase-05-repository-inmemory/
+✔ Contrato criado:
+
+IRepository<T, TId>
 
 
+✔ Implementação:
+
+InMemoryRepository
+
+
+✔ Entidade:
+
+CurrencyRate(Id, From, To, Rate)
+
+
+✔ Serviço:
+
+CurrencyRateService
+
+
+✔ Testes criados:
+tests/fase-05-tests/
+✔ Testam:
+
+Add
+
+ListAll
+
+GetById
+
+Remove
+
+Update
+
+✔ README da fase explicando o repositório
+✔ Política de ID definida (Id informado pelo usuário)
+✔ Projeto compila e passa nos testes
+
+📁 Fase 6 — Repository CSV (Persistência Real)
+
+✔ Pasta: src/fase-06-repository-csv/
+✔ Arquivo CSV salvo corretamente
+✔ Contrato IRepository<T,TId> reutilizado
+✔ Implementação criada:
+
+CsvCurrencyRateRepository
+
+
+✔ Funções do CSV:
+
+Escape de aspas
+
+Escape de vírgulas
+
+Suporte a quebras de linha
+
+Cabeçalho "Id,From,To,Rate"
+
+Ordenação por Id
+
+Leitura e escrita completas
+
+✔ Serviço:
+
+CurrencyRateService
+
+
+(Reutilizado da Fase 5)
+
+✔ Menu do console funcionando (Program.cs)
+✔ Projeto .csproj criado corretamente
+✔ Testes criados: tests/fase-06-tests/
+✔ Testes cobrem:
+
+Arquivo ausente → lista vazia
+
+Add
+
+GetById
+
+Update
+
+Remove
+
+Persistência real em arquivo temporário
+
+Campos com aspas e vírgulas
+
+✔ Todos os testes passam sem erros
+✔ README específico da Fase 6
+✔ Referência ao PDF da Fase 6:
+/mnt/data/Lousa - Fase 6 - Repository Csv.pdf
+
+📚 README Raiz
+
+✔ Lista todas as fases: 0 → 6
+✔ Links para cada pasta
+✔ Comandos de execução
+✔ Comandos de teste
+✔ Explicação geral do projeto
+
+🧱 Organização do Repositório
+
+✔ Estrutura clara:
+
+src/
+  fase-00-orientacoes/
+  fase-01-mapa/
+  fase-02-procedural/
+  fase-03-oo-sem-interface/
+  fase-04-com-interfaces/
+  fase-05-repository-inmemory/
+  fase-06-repository-csv/
+
+tests/
+  fase-04-tests/
+  fase-05-tests/
+  fase-06-tests/
+
+
+✔ .sln (opcional, mas recomendado)
+✔ .gitignore atualizado
+✔ Nenhum arquivo desnecessário
+
+🎯 Check Final
+
+✔ Todas as fases executam com dotnet run
+✔ Todos os testes passam com dotnet test
+✔ README raiz atualizado
+✔ Pastas corretamente nomeadas
+✔ Sem códigos faltando
+✔ Sem warnings importantes
+✔ Projeto pronto para ser apresentado
