@@ -1,9 +1,9 @@
-CHECKLIST GERAL — Fases 0 a 6 (Conversão de Moedas)
+✅ CHECKLIST GERAL — Fases 0 a 7 (Conversão de Moedas)
 📘 Fase 0 — Orientações
 
 ✔ Pasta criada: src/fase-00-orientacoes/
 ✔ Arquivo: fase-00.md
-✔ Explicação sobre processo fixo x variável
+✔ Explicação sobre processo fixo × variável
 ✔ Referência à lousa
 
 🧭 Fase 1 — Mapa Heurístico
@@ -19,23 +19,23 @@ CHECKLIST GERAL — Fases 0 a 6 (Conversão de Moedas)
 ✔ Projeto .csproj configurado
 ✔ Código procedural (sem classes)
 ✔ Program.cs funcionando
-✔ README.md dentro da fase
+✔ README.md da fase
 ✔ Testado com dotnet run
 
-🧱 Fase 3 — OO sem Interface
+🧱 Fase 3 — OO (Orientado a Objetos, sem interfaces)
 
 ✔ Pasta: src/fase-03-oo-sem-interface/
 ✔ Classes criadas:
-
-CurrencyRate ou equivalente
 
 Conversor
 
 MenuApp
 
-✔ Program orientado a objetos (mas rígido)
-✔ README explicando a arquitetura da fase
-✔ Projeto compila e roda (dotnet run)
+CurrencyRate (ou equivalente)
+
+✔ Programa completo orientado a objetos
+✔ README.md da fase
+✔ Projeto compila e executa (dotnet run)
 
 🧩 Fase 4 — Interfaces Plugáveis e Testáveis
 
@@ -49,37 +49,36 @@ IFormatador
 Outras necessárias
 
 ✔ Implementações plugáveis
-✔ Catálogo/Composition Root funcionando
-✔ Testes xUnit usando Fakes
-✔ Pasta: tests/fase-04-tests/
-✔ Projeto compila e testes passam com dotnet test
-✔ README da Fase 4 explicando tudo
+✔ Catálogo / Composition Root configurado
+✔ Testes com fakes (xUnit)
+✔ Pasta de testes: tests/fase-04-tests/
+✔ Testes executando com sucesso (dotnet test)
+✔ README.md da fase explicando arquitetura
 
-🗂️ Fase 5 — Repository InMemory (CurrencyRate)
+🗂️ Fase 5 — Repository InMemory
 
 ✔ Pasta: src/fase-05-repository-inmemory/
-✔ Contrato criado:
+✔ Interface genérica criada:
 
 IRepository<T, TId>
 
 
 ✔ Implementação:
 
-InMemoryRepository
+InMemoryCurrencyRateRepository
 
-
-✔ Entidade:
+✔ Entidade oficial:
 
 CurrencyRate(Id, From, To, Rate)
 
-
-✔ Serviço:
+✔ Serviço de domínio:
 
 CurrencyRateService
 
+✔ Testes:
 
-✔ Testes criados:
 tests/fase-05-tests/
+
 ✔ Testam:
 
 Add
@@ -88,48 +87,31 @@ ListAll
 
 GetById
 
-Remove
-
 Update
 
-✔ README da fase explicando o repositório
-✔ Política de ID definida (Id informado pelo usuário)
+Remove
+
+✔ Política de ID definida (usuário informa)
 ✔ Projeto compila e passa nos testes
+✔ README.md completo
 
 📁 Fase 6 — Repository CSV (Persistência Real)
 
 ✔ Pasta: src/fase-06-repository-csv/
-✔ Arquivo CSV salvo corretamente
-✔ Contrato IRepository<T,TId> reutilizado
-✔ Implementação criada:
+✔ Repositório persistente CSV criado
+✔ Cabeçalho padrão: Id,From,To,Rate
+✔ Escape correto para:
 
-CsvCurrencyRateRepository
+Aspas
 
+Vírgulas
 
-✔ Funções do CSV:
+Quebras de linha
 
-Escape de aspas
-
-Escape de vírgulas
-
-Suporte a quebras de linha
-
-Cabeçalho "Id,From,To,Rate"
-
-Ordenação por Id
-
-Leitura e escrita completas
-
-✔ Serviço:
-
-CurrencyRateService
-
-
-(Reutilizado da Fase 5)
-
-✔ Menu do console funcionando (Program.cs)
-✔ Projeto .csproj criado corretamente
-✔ Testes criados: tests/fase-06-tests/
+✔ Ordenação por Id
+✔ Leitura e escrita com consistência
+✔ Reutilização de CurrencyRateService
+✔ Testes: tests/fase-06-tests/
 ✔ Testes cobrem:
 
 Arquivo ausente → lista vazia
@@ -142,27 +124,97 @@ Update
 
 Remove
 
-Persistência real em arquivo temporário
+Persistência real
 
-Campos com aspas e vírgulas
+Valores contendo aspas/vírgulas
 
-✔ Todos os testes passam sem erros
-✔ README específico da Fase 6
-✔ Referência ao PDF da Fase 6:
+✔ README da fase
+✔ Referência ao PDF da Fase 6
 /mnt/data/Lousa - Fase 6 - Repository Csv.pdf
 
-📚 README Raiz
+🗃️ Fase 7 — Repository JSON (System.Text.Json) ✓✓✓
 
-✔ Lista todas as fases: 0 → 6
-✔ Links para cada pasta
-✔ Comandos de execução
-✔ Comandos de teste
-✔ Explicação geral do projeto
+✔ Pasta criada:
+src/fase-07-repository-json/
 
-🧱 Organização do Repositório
+✔ Arquivos criados:
 
-✔ Estrutura clara:
+Domain/CurrencyRate.cs
 
+Repository/IRepository.cs (reutilizado)
+
+Repository/JsonCurrencyRateRepository.cs
+
+Services/CurrencyRateService.cs
+
+Program.cs
+
+ConversorRepositoryJson.csproj
+
+README.md
+
+✔ Persistência JSON implementada:
+
+Serialização como lista (array)
+
+Formato JSON indentado
+
+Política camelCase
+
+Ignorar nulos (JsonIgnoreCondition.WhenWritingNull)
+
+Ordenação por Id
+
+Tratamento para:
+
+Arquivo ausente
+
+Arquivo vazio
+
+Arquivo corrompido
+
+✔ Política de ID:
+
+Id continua vindo do usuário
+
+✔ Testes criados:
+tests/fase-07-tests/
+
+✔ Testes cobrem:
+
+Arquivo ausente → lista vazia
+
+Add
+
+ListAll
+
+GetById
+
+Update
+
+Remove
+
+Arquivo corrompido → retorna lista vazia
+
+Persistência real em arquivo temporário
+
+✔ Tests.fase07.csproj criado corretamente
+✔ Todos os testes xUnit passam com sucesso (dotnet test)
+✔ README.md explicando JSON e opções do serializer
+
+✔ Referência ao PDF da fase 7:
+/mnt/data/Lousa — Fase 7_ Repository Json (system.text.pdf
+
+📚 README Raiz (Atualizado)
+
+✔ Lista todas as fases (0 → 7)
+✔ Links atualizados para cada pasta
+✔ Comandos de execução dotnet run
+✔ Comandos de teste dotnet test
+✔ Explicação completa do projeto
+✔ Agora inclui a Fase 7 JSON
+
+🧱 Organização Final do Repositório
 src/
   fase-00-orientacoes/
   fase-01-mapa/
@@ -171,23 +223,15 @@ src/
   fase-04-com-interfaces/
   fase-05-repository-inmemory/
   fase-06-repository-csv/
+  fase-07-repository-json/
 
 tests/
   fase-04-tests/
   fase-05-tests/
   fase-06-tests/
+  fase-07-tests/
 
 
-✔ .sln (opcional, mas recomendado)
+✔ .sln (opcional)
 ✔ .gitignore atualizado
-✔ Nenhum arquivo desnecessário
-
-🎯 Check Final
-
-✔ Todas as fases executam com dotnet run
-✔ Todos os testes passam com dotnet test
-✔ README raiz atualizado
-✔ Pastas corretamente nomeadas
-✔ Sem códigos faltando
-✔ Sem warnings importantes
-✔ Projeto pronto para ser apresentado
+✔ Repositório totalmente organizado
