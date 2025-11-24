@@ -9,12 +9,16 @@ Pasta criada: src/fase-00-orientacoes/	✔
 Arquivo: fase-00.md	✔
 Explicação sobre processo fixo × variável	✔
 Referência à lousa	✔
+
+
 🧭 Fase 1 — Mapa Heurístico
 Critério	Status
 Pasta criada: docs/arquitetura/	✔
 Arquivo: fase-01-mapa.md	✔
 Mapa explicando o fluxo da conversão	✔
 Identificação de usuário, entradas e saída	✔
+
+
 💻 Fase 2 — Versão Procedural
 Critério	Status
 Pasta: src/fase-02-procedural/	✔
@@ -23,6 +27,8 @@ Código procedural sem classes	✔
 Program.cs funcional	✔
 README.md da fase	✔
 Execução testada com dotnet run	✔
+
+
 🧱 Fase 3 — OO sem Interfaces
 Critério	Status
 Pasta: src/fase-03-oo-sem-interface/	✔
@@ -30,6 +36,8 @@ Classes: Conversor, MenuApp, CurrencyRate	✔
 Programa orientado a objetos completo	✔
 README.md da fase	✔
 Projeto compila e roda	✔
+
+
 🧩 Fase 4 — Interfaces Plugáveis e Testáveis
 Critério	Status
 Pasta: src/fase-04-com-interfaces/	✔
@@ -40,6 +48,8 @@ Testes com Fakes (xUnit)	✔
 Pasta: tests/fase-04-tests/	✔
 Testes executam sem erros	✔
 README.md da fase	✔
+
+
 🗂️ Fase 5 — Repository InMemory
 Critério	Status
 Pasta: src/fase-05-repository-inmemory/	✔
@@ -51,6 +61,8 @@ Testes: tests/fase-05-tests/	✔
 Testes cobrem CRUD completo	✔
 Política de ID definida (usuário informa)	✔
 README da fase	✔
+
+
 📁 Fase 6 — Repository CSV
 Critério	Status
 Pasta: src/fase-06-repository-csv/	✔
@@ -62,6 +74,8 @@ Testes: tests/fase-06-tests/	✔
 Testes cobrem toda a persistência CSV	✔
 README da fase	✔
 PDF da fase 6 referenciado	✔
+
+
 🗃️ Fase 7 — Repository JSON (System.Text.Json)
 Critério	Status
 Pasta: src/fase-07-repository-json/	✔
@@ -74,6 +88,8 @@ Testes: tests/fase-07-tests/	✔
 Tests.fase07.csproj criado	✔
 README.md da fase	✔
 PDF da fase 7 referenciado	✔
+
+
 ⚖️ Fase 8 — ISP (Interface Segregation Principle)
 Critério	Status
 Pasta: src/fase-08-isp/	✔
@@ -86,6 +102,8 @@ Testes incluem Fakes separados (ReadOnly/WriteOnly)	✔
 Tests.fase08.csproj criado	✔
 README.md da fase 8	✔
 PDF da Fase 8 referenciado	✔
+
+
 📚 README Raiz
 Critério	Status
 Lista todas as fases (0 → 8)	✔
@@ -93,6 +111,8 @@ Links corretos para cada pasta	✔
 Comandos dotnet run e dotnet test	✔
 Explicação geral do projeto completa	✔
 Agora inclui Fase 8 (ISP)	✔
+
+
 🧱 Organização Final do Repositório
 Item	Status
 Estrutura src/ completa (Fases 0–8)	✔
