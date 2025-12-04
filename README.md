@@ -207,4 +207,132 @@ IWriteRepository<T, TId> (apenas Add, Update, Remove).
 
 Objetivo da Fase: Demonstrar que a aplicação do ISP reduz o acoplamento entre o cliente e o contrato, facilita a composição e simplifica drasticamente a criação de componentes para testes.
 
+⚙️ Fase 9 — Dublês Avançados e Testes Assíncronos (async/stream/tempo)
+
+A Fase 9 introduz testes assíncronos reais, streams assíncronos (IAsyncEnumerable), dublês avançados, além de controle de tempo e retentativa sem usar Thread.Sleep.
+O objetivo é consolidar o design orientado a costuras, permitindo testar cenários complexos sem depender de I/O real, relógio real ou tempo real.
+
+✔️ O que foi implementado na Fase 9
+1. Contratos mínimos para costuras essenciais
+
+Foram introduzidos contratos bem pequenos e altamente substituíveis:
+
+IClock → relógio controlável por teste
+
+IIdGenerator → geração previsível de IDs
+
+IAsyncReader<T> → leitura de stream assíncrono
+
+IAsyncWriter<T> → escrita assíncrona controlada
+
+Esses contratos permitem simular qualquer dependência externa real (como arquivos, streams, sockets, tempo, etc.) sem acoplamento.
+
+2. Serviço Assíncrono (PumpService)
+
+Foi criado um serviço genérico com suporte a:
+
+leitura contínua via IAsyncEnumerable<T>
+
+retentativa automática com backoff simulado (sem esperar de verdade)
+
+cancelamento via CancellationToken
+
+supervisão de erros no meio do stream
+
+Esse serviço representa um cenário real de sistemas modernos — pipelines, ETL, filas, mensagens etc.
+
+3. Dublês avançados criados para testes
+✔ FakeClock
+
+Relógio controlado pelo teste, avançando manualmente.
+
+✔ FakeReader
+
+Produz um stream assíncrono:
+
+normal
+
+vazio
+
+com erro no meio
+
+até mesmo infinito (controlado)
+
+✔ FakeWriter
+
+Pode ser configurado para:
+
+sempre escrever
+
+falhar X vezes
+
+falhar sempre
+
+respeitar cancelamento
+
+Tudo isso sem acessar disco nem rede.
+
+4. Testes Unitários completos
+
+Todos os cenários definidores da fase foram implementados:
+
+Cenário	Resultado esperado
+✔Sucesso simples	O PumpService processa todos os itens
+✔Retentativa com erro temporário	Após N falhas, sucesso; sem Sleep real
+✔Cancelamento	Interrompe imediatamente e retorna parcial
+✔Stream vazio	Retorno = 0 sem erros
+✔Erro no meio do stream	Exceção propagada corretamente
+✔Backoff baseado em clock fake	Teste verifica avanço de tempo
+
+Todos os testes são 100% determinísticos, independentemente da velocidade da máquina.
+
+5. README da fase criado
+
+Explicação técnica da fase, contratos, motivação e arquitetura interna.
+
+6. Pasta criada
+src/fase-09-dubles-async/
+tests/fase-09-tests/
+
+
+Inclui:
+
+contratos
+
+PumpService
+
+fakes
+
+testes xUnit
+
+csproj
+
+README
+
+🎯 Objetivo da Fase 9
+
+Garantir que o software pode ser testado em cenários complexos e realistas sem I/O real, com total controle sobre:
+
+tempo
+
+streams
+
+políticas
+
+cancelamento
+
+Esta fase fecha o ciclo de maturidade arquitetural e de testes, tornando o projeto apto a padrões profissionais.
+
+🌟 Benefícios entregues
+
+Sistema extremamente testável
+
+Testes rápidos, determinísticos e confiáveis
+
+Arquitetura orientada a costuras
+
+Independência total de I/O (arquivos, rede, relógio)
+
+Suporte a pipelines e tecnologias modernas (async/await, streaming)
+
 
