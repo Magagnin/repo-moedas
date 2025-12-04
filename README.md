@@ -1,9 +1,17 @@
-Sobre o Projeto — Conversão de Moedas (Fases 0 a 7)
+Sobre o Projeto — Conversão de Moedas (Fases 0 a 11)
 
-Este repositório reúne a evolução completa de um sistema de Conversão de Moedas, construído seguindo as fases definidas nas Lousas de Arquitetura Orientada por Interfaces (Fases 0 a 7).
-Cada fase representa uma etapa real da evolução de um software, começando do procedural até uma arquitetura profissional com repositórios persistentes, testes e múltiplos formatos de armazenamento.
+Este repositório reúne a evolução completa de um sistema de Conversão de Moedas, construído seguindo as fases definidas nas Lousas de Arquitetura Orientada por Interfaces (Fases 0 a 11).
 
-O domínio escolhido é: CurrencyRate, com os campos:
+Cada fase representa uma etapa real da evolução de um software, começando do procedural até uma arquitetura profissional com:
+
+✔ repositórios persistentes (CSV, JSON)
+✔ princípios SOLID
+✔ dublês avançados
+✔ testes assíncronos
+✔ refatorações com cheiros e antídotos
+✔ mini-projeto final consolidado
+
+O domínio escolhido é CurrencyRate, com os campos:
 
 Id – identificador único
 
@@ -15,43 +23,47 @@ Rate – taxa numérica (ex.: 5.20)
 
 📘 Fase 0 — Orientações
 
-Primeiros direcionamentos sobre processo fixo, processo variável e como o sistema evoluiria ao longo das fases seguintes. Sem código.
+Primeiros direcionamentos sobre:
+
+processo fixo × variável
+
+como o sistema evoluiria ao longo das fases
+
+sem código
 
 🧭 Fase 1 — Mapa Heurístico
 
 Primeira visualização do sistema:
 
-fluxo de conversão
+fluxo básico da conversão
 
-interações básicas
+entradas, saídas
 
-primeiros pensamentos sobre as operações
+primeiros passos do domínio
 
-Ainda sem implementação.
+Ainda sem código.
 
 💻 Fase 2 — Versão Procedural
 
 Primeira implementação funcional:
 
-funções simples
+funções simples, sem classes
 
-sem classes, sem objetos
+lógica direta e rígida
 
-lógica totalmente direta e rígida
+núcleo mínimo do programa
 
-É o núcleo mínimo do sistema.
+🧱 Fase 3 — OO sem Interfaces
 
-🧱 Fase 3 — Programação Orientada a Objetos (sem interfaces)
-
-O código é organizado em classes:
+Código organizado em classes:
 
 Conversor
 
 MenuApp
 
-serviços básicos internos
+CurrencyRate
 
-Ainda não há interfaces, logo o sistema é rígido e difícil de substituir comportamentos.
+Ainda sem interfaces → difícil de substituir comportamentos.
 
 🧩 Fase 4 — Interfaces Plugáveis e Testáveis
 
@@ -59,280 +71,273 @@ Grande salto de arquitetura:
 
 criação de interfaces
 
-implementação de componentes plugáveis
+componentes plugáveis
 
 inversão de dependência (DIP)
 
-testes unitários reais usando fakes
+testes com fakes
 
-composition root para montar tudo
+composição no Catalog/Program
 
-O sistema agora é flexível e testável.
+Agora o sistema é flexível.
 
 🗂️ Fase 5 — Repository InMemory
 
-Primeira aparição de persistência (simulada):
+Primeiro repositório real (simulado):
 
-criação da entidade CurrencyRate
+entidade CurrencyRate
 
-criação do contrato genérico:
-IRepository<T, TId>
+contrato genérico IRepository<T, TId>
 
-implementação InMemory usando Dictionary<int, T>
+implementação InMemory
 
-CurrencyRateService com regras de negócio e validação
+CurrencyRateService com validações
 
-testes unitários completos cobrindo CRUD
+testes completos de CRUD
 
-Nenhum arquivo ainda—tudo vive na memória do processo.
+Nenhum arquivo físico ainda.
 
-📁 Fase 6 — Repository CSV (Persistência em arquivo)
+📁 Fase 6 — Repository CSV
 
-Agora o sistema persiste dados no disco de verdade:
+Agora com persistência real:
 
-implementação CsvCurrencyRateRepository
+CsvCurrencyRateRepository
 
-arquivo: currency_rates.csv
+arquivo currency_rates.csv
 
-padrão do CSV com cabeçalho fixo
+serialização e desserialização manual
 
-serialização e desserialização manuais
+serviço permanece o mesmo
 
-serviço inalterado (graças ao contrato da interface)
-
-testes cobrindo:
-
-criação do arquivo
-
-persistência real
-
-leitura e escrita consistentes
-
-erro em linhas inválidas tratado corretamente
-
-Esta fase introduz uma forma real de armazenamento.
+testes cobrindo leitura, escrita, erros
 
 🗃️ Fase 7 — Repository JSON (System.Text.Json)
 
-Evolução da persistência: agora o repositório armazena os dados em JSON, usando a API oficial do .NET.
+Evolução da persistência:
 
-Nesta fase foram implementados:
+JsonCurrencyRateRepository
 
-✔️ JsonCurrencyRateRepository
-
-Armazenamento em arquivo JSON
-
-Estrutura escolhida: lista (array)
-
-Formatação:
-
-[
-  {
-    "id": 1,
-    "from": "USD",
-    "to": "BRL",
-    "rate": 5.2
-  }
-]
-
-
-Usa System.Text.Json com:
-
-CamelCase
+arquivo JSON com camelCase
 
 WriteIndented
 
-ignorar nulls
+tratamento de arquivo inexistente/vazio/corrompido
 
-Lida com:
+testes completos de integração
 
-arquivo inexistente
+⚖️ Fase 8 — ISP (Interface Segregation Principle)
 
-arquivo vazio
+Refatoração para aplicar o ISP:
 
-arquivo corrompido
+contrato “gordo” foi quebrado:
 
-Id definido pelo usuário (Fase 5 e 6 mantida)
+IReadRepository
 
-✔️ Serviço de Domínio
+IWriteRepository
 
-Reutilizado sem alterações (CurrencyRateService), mostrando o ganho do DIP.
+CurrencyRateService passou a depender apenas do necessário
 
-✔️ Programa console (Program.cs)
+JsonRepository implementa ambos contratos
 
-Menu completo para CRUD usando JSON.
+fakes mínimos criados
 
-✔️ Testes de Integração
+nota de design obrigatória
 
-100% focados no repositório JSON:
+Melhora grande na coesão.
 
-arquivo inexistente → lista vazia
+⚙️ Fase 9 — Dublês Avançados e Testes Assíncronos
 
-Add deve persistir corretamente
+Fase moderna focada em testabilidade avançada:
 
-GetById existente/ausente
+✔ Novos contratos essenciais:
 
-Update existente/ausente
+IClock – controle de tempo
 
-Remove persistente
+IIdGenerator – geração previsível
 
-arquivo corrompido deve retornar lista vazia
+IAsyncReader<T> – leitura via stream assíncrono
 
-Cada teste usa arquivos temporários para evitar efeitos colaterais.
+IAsyncWriter<T> – escrita assíncrona
 
-✔️ Objetivo da fase
+✔ Serviço Assíncrono (PumpService)
 
-Demonstrar que, usando interfaces, mudar o formato de persistência não exige mudar o serviço, nem o domínio.
+leitura contínua
 
-O contrato garante a estabilidade da arquitetura.
+retentativas sem usar Sleep
 
-⚖️ Fase 8 — Interface Segregation Principle (ISP)
-Esta fase é focada na refatoração arquitetural para aplicar o Princípio da Segregação de Interfaces (ISP), o quarto princípio do SOLID. O objetivo é eliminar o contrato "gordo" e garantir que os clientes dependam apenas dos métodos que realmente utilizam.
+backoff controlado por clock fake
 
-Nesta fase foram implementados:
+cancelamento com CancellationToken
 
-✔️ Segregação de Contratos: O contrato genérico IRepository<T, TId> (leitura e escrita) foi quebrado em dois contratos mínimos e coesos:
+tratamento de erro no meio do stream
 
-IReadRepository<T, TId> (apenas GetById, ListAll).
+✔ Dublês avançados
 
-IWriteRepository<T, TId> (apenas Add, Update, Remove).
+FakeClock
 
-✔️ Cliente Refatorado: O CurrencyRateService foi ajustado para depender de ambos os contratos segregados em seu construtor, utilizando apenas o necessário para cada operação (ex.: ListAll usa apenas IReadRepository).
+FakeReader com:
 
-✔️ Implementação Unificada: O JsonCurrencyRateRepository (da Fase 7) foi adaptado para implementar ambas as novas interfaces (IReadRepository e IWriteRepository), mantendo a lógica de persistência JSON.
+erro no meio
 
-✔️ Dublês Mínimos em Testes: Criação de ReadOnlyFake e WriteOnlyFake nos testes de serviço para demonstrar que é possível criar dublês que implementam apenas o subconjunto de métodos exigidos pelo cliente, simplificando os testes.
+sequências infinitas
 
-✔️ Nota de Design: Documentação obrigatória (NotaDeDesign.md) explicando o diagnóstico da interface gorda, a segregação escolhida e seus efeitos na arquitetura.
+sequências vazias
 
-Objetivo da Fase: Demonstrar que a aplicação do ISP reduz o acoplamento entre o cliente e o contrato, facilita a composição e simplifica drasticamente a criação de componentes para testes.
+FakeWriter configurável
 
-⚙️ Fase 9 — Dublês Avançados e Testes Assíncronos (async/stream/tempo)
+✔ Testes completos
 
-A Fase 9 introduz testes assíncronos reais, streams assíncronos (IAsyncEnumerable), dublês avançados, além de controle de tempo e retentativa sem usar Thread.Sleep.
-O objetivo é consolidar o design orientado a costuras, permitindo testar cenários complexos sem depender de I/O real, relógio real ou tempo real.
+sucesso simples
 
-✔️ O que foi implementado na Fase 9
-1. Contratos mínimos para costuras essenciais
+retentativas
 
-Foram introduzidos contratos bem pequenos e altamente substituíveis:
-
-IClock → relógio controlável por teste
-
-IIdGenerator → geração previsível de IDs
-
-IAsyncReader<T> → leitura de stream assíncrono
-
-IAsyncWriter<T> → escrita assíncrona controlada
-
-Esses contratos permitem simular qualquer dependência externa real (como arquivos, streams, sockets, tempo, etc.) sem acoplamento.
-
-2. Serviço Assíncrono (PumpService)
-
-Foi criado um serviço genérico com suporte a:
-
-leitura contínua via IAsyncEnumerable<T>
-
-retentativa automática com backoff simulado (sem esperar de verdade)
-
-cancelamento via CancellationToken
-
-supervisão de erros no meio do stream
-
-Esse serviço representa um cenário real de sistemas modernos — pipelines, ETL, filas, mensagens etc.
-
-3. Dublês avançados criados para testes
-✔ FakeClock
-
-Relógio controlado pelo teste, avançando manualmente.
-
-✔ FakeReader
-
-Produz um stream assíncrono:
-
-normal
-
-vazio
-
-com erro no meio
-
-até mesmo infinito (controlado)
-
-✔ FakeWriter
-
-Pode ser configurado para:
-
-sempre escrever
-
-falhar X vezes
-
-falhar sempre
-
-respeitar cancelamento
-
-Tudo isso sem acessar disco nem rede.
-
-4. Testes Unitários completos
-
-Todos os cenários definidores da fase foram implementados:
-
-Cenário	Resultado esperado
-✔Sucesso simples	O PumpService processa todos os itens
-✔Retentativa com erro temporário	Após N falhas, sucesso; sem Sleep real
-✔Cancelamento	Interrompe imediatamente e retorna parcial
-✔Stream vazio	Retorno = 0 sem erros
-✔Erro no meio do stream	Exceção propagada corretamente
-✔Backoff baseado em clock fake	Teste verifica avanço de tempo
-
-Todos os testes são 100% determinísticos, independentemente da velocidade da máquina.
-
-5. README da fase criado
-
-Explicação técnica da fase, contratos, motivação e arquitetura interna.
-
-6. Pasta criada
-src/fase-09-dubles-async/
-tests/fase-09-tests/
-
-
-Inclui:
-
-contratos
-
-PumpService
-
-fakes
-
-testes xUnit
-
-csproj
-
-README
-
-🎯 Objetivo da Fase 9
-
-Garantir que o software pode ser testado em cenários complexos e realistas sem I/O real, com total controle sobre:
-
-tempo
-
-streams
-
-políticas
+stream vazio
 
 cancelamento
 
-Esta fase fecha o ciclo de maturidade arquitetural e de testes, tornando o projeto apto a padrões profissionais.
+erro no meio
 
-🌟 Benefícios entregues
+backoff baseado em clock fake
 
-Sistema extremamente testável
+✔ Pasta da fase
+src/fase-09-dubles-async/
+tests/fase-09-tests/
 
-Testes rápidos, determinísticos e confiáveis
+🧼 Fase 10 — Cheiros e Antídotos (Refatorações profissionais)
 
-Arquitetura orientada a costuras
+A Fase 10 foca em detectar cheiros de código e aplicar refatorações pequenas e seguras, como um desenvolvedor profissional faria diariamente.
 
-Independência total de I/O (arquivos, rede, relógio)
+Foi seguida integralmente a Lousa da Fase 10.
 
-Suporte a pipelines e tecnologias modernas (async/await, streaming)
+✔ Cheiros identificados e corrigidos:
+1. Parâmetros demais / SRP quebrado
 
+Métodos com responsabilidades duplicadas foram quebrados.
 
+A validação do CurrencyRate foi isolada em CurrencyRateValidator.
+
+2. Condições complexas
+
+Ifs longos foram substituídos por early-return.
+
+Métodos foram reduzidos a blocos menores e mais legíveis.
+
+3. Funções grandes
+
+Program.cs separado em camadas pequenas.
+
+Repositórios ganharam métodos auxiliares privados.
+
+4. Nomes ruins
+
+renomeação para nomes claros e autoexplicativos
+
+From → SourceCurrency
+
+To → TargetCurrency
+(nomes permanecem compatíveis com JSON e CSV)
+
+5. Código morto removido
+
+variáveis não utilizadas
+
+métodos redundantes
+
+imports desnecessários
+
+6. Exceções genéricas
+
+trocadas por ArgumentException, InvalidDataException, InvalidOperationException.
+
+7. Acesso externo duplicado
+
+padrões de repetição no JsonRepository foram encapsulados.
+
+✔ Pastas criadas
+src/fase-10-refatoracoes/
+tests/fase-10-tests/
+
+✔ Testes garantem que:
+
+nada mudou no comportamento
+
+apenas o design foi melhorado
+
+cobertura continua intacta
+
+🌟 Fase 11 — Mini-projeto de Consolidação (Completo)
+
+Fase final, integrando tudo em um projeto profissional completo.
+
+✔ Conteúdos da Fase 11
+1. Domínio completo:
+
+CurrencyRate (record)
+
+regras validadas
+
+serviço consolidado
+
+2. Repositórios reutilizados
+
+InMemory
+
+JSON com design final
+
+ambos implementam os contratos segregados
+
+3. Aplicação Console funcional
+
+registra moedas
+
+lista taxas
+
+renomeia
+
+remove
+
+grava em JSON
+
+4. Testes completos
+
+testes de serviço
+
+integração do repositório JSON
+
+5. Nota de design
+
+mostrando como as fases anteriores garantiram:
+
+testabilidade
+
+flexibilidade
+
+separação de responsabilidades
+
+evolução sem quebrar nada
+
+6. Estrutura da Fase 11
+src/fase-11-mini-projeto/
+tests/fase-11-tests/
+
+Inclui:
+
+Program.cs
+
+CurrencyRateService
+
+Repositórios
+
+Testes de unidade e integração
+
+Projeto .csproj
+
+✔ Estado Final (Fases 0 a 11 concluídas)
+
+O projeto agora é:
+
+🏆 totalmente modular
+🏆 profissional
+🏆 facilmente testável
+🏆 pronto para extensões (API, Web, Banco de Dados)
+🏆 exemplo real de Arquitetura por Fases
